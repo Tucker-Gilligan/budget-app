@@ -1,13 +1,10 @@
+import { Box, Typography } from '@material-ui/core';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-const App = () => {
-  return (
-    <div className="App">
-      hello
-    </div>
-  );
-}
+const App = (): JSX.Element => (
+  <Box>
+    <Typography className="App">hello</Typography>
+  </Box>
+);
 
 export default App;
