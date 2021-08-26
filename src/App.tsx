@@ -1,9 +1,10 @@
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import React from 'react';
+import DashboardContainer from './Dashboard/Container';
 
-const App = (): JSX.Element => (
+const App = (): any => (
   <Box>
-    <Typography className="App">hello</Typography>
+    <DashboardContainer />
   </Box>
 );
 
