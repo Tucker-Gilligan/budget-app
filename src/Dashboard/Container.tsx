@@ -18,8 +18,6 @@ const dashboardContainerStyles = (theme: Theme) => createStyles({
     background: 'white',
     display: 'flex',
     flexDirection: 'column',
-    border: 'solid 5px red',
-    // width: '70%',
   },
   CloseButton: {
     justifyContent: 'left',
@@ -56,7 +54,6 @@ const DashboardContainerComponent = ({
       </ButtonBase>
       <Dialog
         open={isOpen}
-        onEscapeKeyDown={handleCloseModal}
         className={classes?.Dialog}
         maxWidth="md"
         fullWidth
