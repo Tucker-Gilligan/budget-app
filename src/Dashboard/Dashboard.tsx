@@ -3,9 +3,8 @@ import { WithStyles, createStyles, withStyles } from '@material-ui/styles';
 import React, { useEffect } from 'react';
 import { ApolloClient, gql, InMemoryCache } from '@apollo/client';
 import Table from '../Components/Table/Table';
-import { useAppDispatch, useAppSelector } from '../Redux/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { setBudget } from '../Redux/budgetSlice';
-// import { BudgetState } from './budgetSlice';
 
 export const dashboardComponentStyles = (): any => createStyles({
   Container: {},

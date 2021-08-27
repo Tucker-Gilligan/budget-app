@@ -54,7 +54,6 @@ const DashboardContainerComponent = ({
       </ButtonBase>
       <Dialog
         open={isOpen}
-        // onEscapeKeyDown={handleCloseModal}
         className={classes?.Dialog}
         maxWidth="md"
         fullWidth
