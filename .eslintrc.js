@@ -29,4 +29,9 @@ module.exports = {
     }
   ],
   parser: '@typescript-eslint/parser',
-};
+  rules: {
+    '@typescript-eslint/explicit-function-return-type': {
+      allowExpressions: true
+    }
+  }
+}

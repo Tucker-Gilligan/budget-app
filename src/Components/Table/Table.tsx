@@ -1,5 +1,4 @@
 import {
-  Box,
   Table,
   TableBody,
   TableCell,
@@ -8,8 +7,9 @@ import {
 } from '@material-ui/core';
 import { createStyles, withStyles, WithStyles } from '@material-ui/styles';
 import React from 'react';
+import { BudgetState } from '../../Redux/budgetSlice';
 
-export const tableComponentStyles = (): any => createStyles({
+export const tableComponentStyles = () => createStyles({
   TableHead: {
     fontWeight: 'bold',
     backgroundColor: 'white',
@@ -20,11 +20,30 @@ export const tableComponentStyles = (): any => createStyles({
 });
 
 interface TableProps extends Partial<WithStyles<typeof tableComponentStyles>> {
-  rowData: string[];
+  rowData: BudgetState[];
 }
 
 const TableComponent = ({ rowData, classes }: TableProps): JSX.Element => {
-  console.log(rowData);
+  const TableRows = (
+    rowData.map((row) => {
+      const {
+        item,
+        category,
+        budget,
+        actual,
+      } = row;
+
+      return (
+        <TableRow key={`${item}-row`}>
+          <TableCell>{item}</TableCell>
+          <TableCell>{category}</TableCell>
+          <TableCell>{budget}</TableCell>
+          <TableCell>{actual}</TableCell>
+        </TableRow>
+      );
+    })
+  );
+
   return (
     <Table size="medium" stickyHeader>
       <TableHead className={classes?.TableHead}>
@@ -36,12 +55,7 @@ const TableComponent = ({ rowData, classes }: TableProps): JSX.Element => {
         </TableRow>
       </TableHead>
       <TableBody className={classes?.TableBody}>
-        <TableRow>
-          <TableCell>Gym Membership</TableCell>
-          <TableCell>Wellness</TableCell>
-          <TableCell>$30</TableCell>
-          <TableCell>$280</TableCell>
-        </TableRow>
+        {TableRows}
       </TableBody>
     </Table>
   );
