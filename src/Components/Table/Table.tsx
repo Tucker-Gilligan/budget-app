@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Table,
   TableBody,
@@ -6,7 +7,6 @@ import {
   TableRow,
 } from '@material-ui/core';
 import { createStyles, withStyles, WithStyles } from '@material-ui/styles';
-import React from 'react';
 import { BudgetState } from '../../Redux/budgetSlice';
 
 export const tableComponentStyles = () => createStyles({
@@ -32,7 +32,7 @@ const TableComponent = ({ rowData, classes }: TableProps): JSX.Element => {
         budget,
         actual,
       } = row;
-
+      // @TODO: change "key" to include "ID"
       return (
         <TableRow key={`${item}-row`}>
           <TableCell>{item}</TableCell>

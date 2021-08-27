@@ -2,6 +2,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+// @TODO: Add ID to BudgetState
 export interface BudgetState {
   item: string,
   category: string,
