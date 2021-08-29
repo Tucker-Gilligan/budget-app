@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
-import DashboardContainer from './Dashboard/Container';
+import Dashboard from './Dashboard/Dashboard';
 
 const App = (): JSX.Element => (
   <Box>
-    <DashboardContainer />
+    <Dashboard />
   </Box>
 );
 

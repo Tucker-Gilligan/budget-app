@@ -1,13 +1,9 @@
 import React from 'react';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
+  Table, TableBody, TableCell, TableHead, TableRow,
 } from '@material-ui/core';
 import { createStyles, withStyles, WithStyles } from '@material-ui/styles';
-import { BudgetState } from '../../Redux/budgetSlice';
+import { BudgetState } from '../Redux/budgetSlice';
 
 export const tableComponentStyles = () => createStyles({
   TableHead: {
@@ -24,25 +20,20 @@ interface TableProps extends Partial<WithStyles<typeof tableComponentStyles>> {
 }
 
 const TableComponent = ({ rowData, classes }: TableProps): JSX.Element => {
-  const TableRows = (
-    rowData.map((row) => {
-      const {
-        item,
-        category,
-        budget,
-        actual,
-      } = row;
-      // @TODO: change "key" to include "ID"
-      return (
-        <TableRow key={`${item}-row`}>
-          <TableCell>{item}</TableCell>
-          <TableCell>{category}</TableCell>
-          <TableCell>{budget}</TableCell>
-          <TableCell>{actual}</TableCell>
-        </TableRow>
-      );
-    })
-  );
+  const TableRows = rowData.map((row) => {
+    const {
+      item, category, budget, actual,
+    } = row;
+    // @TODO: change "key" to include "ID"
+    return (
+      <TableRow key={`${item}-row`}>
+        <TableCell>{item}</TableCell>
+        <TableCell>{category}</TableCell>
+        <TableCell>{budget}</TableCell>
+        <TableCell>{actual}</TableCell>
+      </TableRow>
+    );
+  });
 
   return (
     <Table size="medium" stickyHeader>
@@ -54,9 +45,7 @@ const TableComponent = ({ rowData, classes }: TableProps): JSX.Element => {
           <TableCell>Actual</TableCell>
         </TableRow>
       </TableHead>
-      <TableBody className={classes?.TableBody}>
-        {TableRows}
-      </TableBody>
+      <TableBody className={classes?.TableBody}>{TableRows}</TableBody>
     </Table>
   );
 };

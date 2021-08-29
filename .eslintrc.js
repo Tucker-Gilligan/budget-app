@@ -30,8 +30,7 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   rules: {
-    '@typescript-eslint/explicit-function-return-type': {
-      allowExpressions: true
-    }
-  }
+    // disable the rule for all files
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  },
 }

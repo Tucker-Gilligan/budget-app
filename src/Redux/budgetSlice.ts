@@ -4,10 +4,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // @TODO: Add ID to BudgetState
 export interface BudgetState {
-  item: string,
-  category: string,
-  budget: number,
-  actual: number,
+  item: string;
+  category: string;
+  budget: number;
+  actual: number;
 }
 
 export const initialBudgetState: BudgetState[] = [];
