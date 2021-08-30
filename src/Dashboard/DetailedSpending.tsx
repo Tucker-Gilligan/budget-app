@@ -1,52 +1,26 @@
+import React from 'react';
 import { TableCell, TableRow } from '@material-ui/core';
-import {
-  WithStyles,
-  createStyles,
-  withStyles,
-} from '@material-ui/core/styles';
-import React, { useEffect } from 'react';
-import { ApolloClient, gql, InMemoryCache } from '@apollo/client';
+import { WithStyles, createStyles, withStyles } from '@material-ui/core/styles';
+import { useQuery } from '@apollo/client';
 import CustomTable from '../Components/CustomTable';
 import { useAppDispatch, useAppSelector } from '../Redux/hooks';
 import { setBudget } from '../Redux/budgetSlice';
+import BudgetServiceProvider from '../services/budget-service';
 
 export const detailedSpendingComponentStyles = () => createStyles({
   Table: {},
 });
 
-export type MonthOverviewProps = Partial<
-WithStyles<typeof detailedSpendingComponentStyles>
->;
+export type MonthOverviewProps = Partial<WithStyles<typeof detailedSpendingComponentStyles>>;
 
-const DetailedSpendingComponent = ({
-  classes,
-}: MonthOverviewProps): JSX.Element => {
+const DetailedSpendingComponent = ({ classes }: MonthOverviewProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const budgetState = useAppSelector((state) => state.budget);
-  useEffect(() => {
-    const client = new ApolloClient({
-      uri: 'http://localhost:4000/',
-      cache: new InMemoryCache(),
-    });
-    client
-      .query({
-        query: gql`
-          query BudgetQuery {
-            budget {
-              item
-              category
-              budget
-              actual
-            }
-          }
-        `,
-      })
-      .then((result) => {
-        const { data } = result;
-        dispatch(setBudget(data.budget));
-      });
-  }, [dispatch]);
-
+  const { GET_BUDGET_INFO } = BudgetServiceProvider;
+  const { data, loading, error } = useQuery(GET_BUDGET_INFO);
+  if (data) {
+    dispatch(setBudget(data.budget));
+  }
   const TableRows = budgetState.map((row) => {
     const {
       item, category, budget, actual,
@@ -70,6 +44,8 @@ const DetailedSpendingComponent = ({
       classes={{
         Table: classes?.Table,
       }}
+      loading={loading}
+      error={error}
     />
   );
 };
