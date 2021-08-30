@@ -3,13 +3,12 @@ import {
   createStyles,
   withStyles,
   WithStyles,
-  Theme,
 } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import DashboardHeader from './DashboardHeader';
 import DashboardBody from './DashboardBody';
 
-const dashboardStyles = (theme: Theme) => createStyles({
+const dashboardStyles = () => createStyles({
   Container: {
     display: 'flex',
     flexDirection: 'column',
