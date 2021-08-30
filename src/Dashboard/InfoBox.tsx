@@ -3,12 +3,11 @@ import {
   createStyles,
   withStyles,
   WithStyles,
-  Theme,
 } from '@material-ui/core/styles';
 import { Container, Typography } from '@material-ui/core';
 import ModalButton from '../Components/Modal/ModalButton';
 
-const infoBoxStyles = (theme: Theme) => createStyles({
+const infoBoxStyles = () => createStyles({
   Container: {
     display: 'flex',
     flexDirection: 'column',
@@ -40,7 +39,7 @@ const InfoBoxComponent = ({
 }: InfoBoxProps) => (
   <Container className={classes?.Container}>
     <Typography>{label}</Typography>
-    <Typography className={classes?.DollarAmount}>{dollarAmount}</Typography>
+    <Typography className={classes?.DollarAmount}>{`$${dollarAmount}`}</Typography>
     <ModalButton
       dialogContent={dialogContent}
       text={buttonText}

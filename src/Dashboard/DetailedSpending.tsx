@@ -3,23 +3,22 @@ import {
   WithStyles,
   createStyles,
   withStyles,
-  Theme,
 } from '@material-ui/core/styles';
 import React, { useEffect } from 'react';
 import { ApolloClient, gql, InMemoryCache } from '@apollo/client';
-import Table from '../Components/Table';
-import { useAppDispatch, useAppSelector } from '../hooks';
+import CustomTable from '../Components/CustomTable';
+import { useAppDispatch, useAppSelector } from '../Redux/hooks';
 import { setBudget } from '../Redux/budgetSlice';
 
-export const monthOverviewComponentStyles = () => createStyles({
+export const detailedSpendingComponentStyles = () => createStyles({
   Table: {},
 });
 
 export type MonthOverviewProps = Partial<
-WithStyles<typeof monthOverviewComponentStyles>
+WithStyles<typeof detailedSpendingComponentStyles>
 >;
 
-const MonthOverviewComponent = ({
+const DetailedSpendingComponent = ({
   classes,
 }: MonthOverviewProps): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -62,23 +61,19 @@ const MonthOverviewComponent = ({
       </TableRow>
     );
   });
-  const headers = ['Item', 'Category', 'Budget', 'Actual'];
-  const columnHeaders = headers.map((header) => (
-    // @TODO: change "key" to include "ID"
-    <TableCell key={`${header}-column-header`}>{header}</TableCell>
-  ));
+  const columnNames = ['Item', 'Category', 'Budget', 'Actual'];
 
   return (
-    // <Container className={classes?.Container}>
-    <Table
+    <CustomTable
       rowData={TableRows}
-      columnHeaders={columnHeaders}
+      columnNames={columnNames}
       classes={{
         Table: classes?.Table,
       }}
     />
-    // </Container>
   );
 };
 
-export default withStyles(monthOverviewComponentStyles)(MonthOverviewComponent);
+const DetailedSpending = withStyles(detailedSpendingComponentStyles)(DetailedSpendingComponent);
+DetailedSpending.displayName = 'Detailed Spending';
+export default DetailedSpending;

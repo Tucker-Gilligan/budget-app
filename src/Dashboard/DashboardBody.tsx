@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core/styles';
 import InfoBox from './InfoBox';
 import DetailedSpending from './DetailedSpending';
+import BudgetTable from './BudgetTable';
 
 const dashboardBodyStyles = (theme: Theme) => createStyles({
   Container: {
@@ -19,14 +20,21 @@ const dashboardBodyStyles = (theme: Theme) => createStyles({
   Box: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   Table: {
     marginTop: theme.spacing(3),
     padding: `0 ${theme.spacing(2)}`,
   },
+  DollarAmount: {
+    fontSize: '20px',
+    // fontWeight: 'bold',
+  },
 });
 
-export type DashboardBodyProps = Partial<WithStyles<typeof dashboardBodyStyles>>;
+export type DashboardBodyProps = Partial<
+WithStyles<typeof dashboardBodyStyles>
+>;
 
 const DashboardBodyComponent = ({ classes }: DashboardBodyProps) => (
   <Container className={classes?.Container}>
@@ -36,16 +44,23 @@ const DashboardBodyComponent = ({ classes }: DashboardBodyProps) => (
         dollarAmount={4000}
         dialogContent={<DetailedSpending />}
         buttonText="View Detailed Income"
+        classes={{ DollarAmount: classes?.DollarAmount }}
       />
       <InfoBox
         label="Spending"
         dollarAmount={2500}
         dialogContent={<DetailedSpending />}
         buttonText="View Detailed Spending"
+        classes={{
+          DollarAmount: classes?.DollarAmount,
+          // Container: classes?.InfoBoxContainer
+        }}
       />
     </Box>
-    <DetailedSpending
+    <BudgetTable
       classes={{ Table: classes?.Table }}
+      columnData={['Category', 'Budget', 'Actual']}
+      rowData={[{ category: 'food', budget: 100, actual: 200 }]}
     />
   </Container>
 );

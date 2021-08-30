@@ -90,4 +90,6 @@ const DashboardHeaderComponent = ({
   );
 };
 
-export default withStyles(dashboardHeaderStyles)(DashboardHeaderComponent);
+const DashboardHeader = withStyles(dashboardHeaderStyles)(DashboardHeaderComponent);
+DashboardHeader.displayName = 'DashboardHeader';
+export default DashboardHeader;
