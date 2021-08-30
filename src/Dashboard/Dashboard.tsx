@@ -1,50 +1,30 @@
+import React from 'react';
+import {
+  createStyles,
+  withStyles,
+  WithStyles,
+} from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
-import { WithStyles, createStyles, withStyles } from '@material-ui/styles';
-import React, { useEffect } from 'react';
-import { ApolloClient, gql, InMemoryCache } from '@apollo/client';
-import Table from '../Components/Table/Table';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { setBudget } from '../Redux/budgetSlice';
+import DashboardHeader from './DashboardHeader';
+import DashboardBody from './DashboardBody';
 
-export const dashboardComponentStyles = (): any => createStyles({
-  Container: {},
+const dashboardStyles = () => createStyles({
+  Container: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100vh',
+  },
 });
 
-export type DashboardProps = Partial<
-WithStyles<typeof dashboardComponentStyles>
->;
+export type DashboardProps = Partial<WithStyles<typeof dashboardStyles>>;
 
-const DashboardComponent = ({ classes }: DashboardProps): JSX.Element => {
-  const dispatch = useAppDispatch();
-  const budgetState = useAppSelector((state) => state.budget);
-  useEffect(() => {
-    const client = new ApolloClient({
-      uri: 'http://localhost:4000/',
-      cache: new InMemoryCache(),
-    });
-    client
-      .query({
-        query: gql`
-        query BudgetQuery {
-          budget {
-            item
-            category
-            budget
-            actual
-          }
-        }
-      `,
-      })
-      .then((result) => {
-        const { data } = result;
-        dispatch(setBudget(data.budget));
-      });
-  }, [dispatch]);
-  return (
-    <Container className={classes?.Container}>
-      <Table rowData={budgetState} />
-    </Container>
-  );
-};
+const DashboardComponent = ({ classes }: DashboardProps) => (
+  <Container className={classes?.Container}>
+    <DashboardHeader icon="check" saved={1500} onBudget />
+    <DashboardBody />
+  </Container>
+);
 
-export default withStyles(dashboardComponentStyles)(DashboardComponent);
+const Dashboard = withStyles(dashboardStyles)(DashboardComponent);
+Dashboard.displayName = 'Dashboard';
+export default Dashboard;
