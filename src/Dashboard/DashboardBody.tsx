@@ -28,7 +28,6 @@ const dashboardBodyStyles = (theme: Theme) => createStyles({
   },
   DollarAmount: {
     fontSize: '20px',
-    // fontWeight: 'bold',
   },
 });
 
@@ -53,7 +52,6 @@ const DashboardBodyComponent = ({ classes }: DashboardBodyProps) => (
         buttonText="View Detailed Spending"
         classes={{
           DollarAmount: classes?.DollarAmount,
-          // Container: classes?.InfoBoxContainer
         }}
       />
     </Box>
