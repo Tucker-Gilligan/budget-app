@@ -1,8 +1,10 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 import {
   Table, TableBody, TableCell, TableHead, TableRow,
 } from '@material-ui/core';
 import { createStyles, withStyles, WithStyles } from '@material-ui/styles';
+import { ApolloError } from '@apollo/client';
 
 export const tableComponentStyles = () => createStyles({
   Table: {},
@@ -18,18 +20,23 @@ export const tableComponentStyles = () => createStyles({
 interface TableProps extends Partial<WithStyles<typeof tableComponentStyles>> {
   columnNames: string[];
   rowData: JSX.Element | React.ReactNode;
+  loading?: boolean | undefined;
+  error?: ApolloError | undefined;
 }
 
 const TableComponent = ({
   rowData,
   classes,
   columnNames,
+  loading,
+  error,
 }: TableProps): JSX.Element => {
   const columnHeaders = columnNames.map((header) => (
     // @TODO: change "key" to include "ID"
     <TableCell key={`detailed-spending-${header}-header`}>{header}</TableCell>
   ));
-
+  console.log(loading);
+  console.log(error);
   return (
     <Table size="medium" className={classes?.Table} stickyHeader>
       <TableHead className={classes?.TableHead}>
