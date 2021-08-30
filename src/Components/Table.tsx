@@ -1,11 +1,14 @@
 import React from 'react';
 import {
-  Table, TableBody, TableCell, TableHead, TableRow,
+  Table,
+  TableBody,
+  TableHead,
+  TableRow,
 } from '@material-ui/core';
 import { createStyles, withStyles, WithStyles } from '@material-ui/styles';
-import { BudgetState } from '../Redux/budgetSlice';
 
 export const tableComponentStyles = () => createStyles({
+  Table: {},
   TableHead: {
     fontWeight: 'bold',
     backgroundColor: 'white',
@@ -16,38 +19,23 @@ export const tableComponentStyles = () => createStyles({
 });
 
 interface TableProps extends Partial<WithStyles<typeof tableComponentStyles>> {
-  rowData: BudgetState[];
+  columnHeaders: JSX.Element | React.ReactNode;
+  rowData: JSX.Element | React.ReactNode;
 }
 
-const TableComponent = ({ rowData, classes }: TableProps): JSX.Element => {
-  const TableRows = rowData.map((row) => {
-    const {
-      item, category, budget, actual,
-    } = row;
-    // @TODO: change "key" to include "ID"
-    return (
-      <TableRow key={`${item}-row`}>
-        <TableCell>{item}</TableCell>
-        <TableCell>{category}</TableCell>
-        <TableCell>{budget}</TableCell>
-        <TableCell>{actual}</TableCell>
+const TableComponent = ({
+  rowData,
+  classes,
+  columnHeaders,
+}: TableProps): JSX.Element => (
+  <Table size="medium" className={classes?.Table} stickyHeader>
+    <TableHead className={classes?.TableHead}>
+      <TableRow>
+        {columnHeaders}
       </TableRow>
-    );
-  });
-
-  return (
-    <Table size="medium" stickyHeader>
-      <TableHead className={classes?.TableHead}>
-        <TableRow>
-          <TableCell>Item</TableCell>
-          <TableCell>Category</TableCell>
-          <TableCell>Budget</TableCell>
-          <TableCell>Actual</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody className={classes?.TableBody}>{TableRows}</TableBody>
-    </Table>
-  );
-};
+    </TableHead>
+    <TableBody className={classes?.TableBody}>{rowData}</TableBody>
+  </Table>
+);
 
 export default withStyles(tableComponentStyles)(TableComponent);

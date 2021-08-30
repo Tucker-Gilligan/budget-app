@@ -1,17 +1,31 @@
 import React from 'react';
-// import { Box, ButtonBase, Dialog } from '@material-ui/core';
-import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
-import ModalButton from '../Components/Modal/ModalButton';
-import MonthOverview from './MonthOverview';
+import {
+  createStyles,
+  withStyles,
+  WithStyles,
+  Theme,
+} from '@material-ui/core/styles';
+import { Container } from '@material-ui/core';
+import DashboardHeader from './DashboardHeader';
+import DashboardBody from './DashboardBody';
 
-const dashboardStyles = () => createStyles({});
+const dashboardStyles = (theme: Theme) => createStyles({
+  Container: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100vh',
+  },
+});
 
 export type DashboardProps = Partial<WithStyles<typeof dashboardStyles>>;
 
-const DashboardComponent = () => (
-  <>
-    <ModalButton modalContent={<MonthOverview />} text="View Detailed Spending" />
-  </>
+const DashboardComponent = ({ classes }: DashboardProps) => (
+  <Container className={classes?.Container}>
+    <DashboardHeader icon="check" saved={1500} onBudget />
+    <DashboardBody />
+  </Container>
 );
 
-export default withStyles(dashboardStyles)(DashboardComponent);
+const Dashboard = withStyles(dashboardStyles)(DashboardComponent);
+Dashboard.displayName = 'Dashboard';
+export default Dashboard;

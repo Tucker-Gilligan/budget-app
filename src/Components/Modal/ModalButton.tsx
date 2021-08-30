@@ -17,11 +17,11 @@ const modalButtonStyles = (theme: Theme) => createStyles({
 
 export interface ModalButtonProps
   extends Partial<WithStyles<typeof modalButtonStyles>> {
-  modalContent: JSX.Element | React.ReactNode;
-  text: string;
+  dialogContent: JSX.Element | React.ReactNode;
+  text: string | JSX.Element | React.ReactNode;
 }
 
-const ModalButtonComponent = ({ classes, modalContent, text }: ModalButtonProps) => {
+const ModalButtonComponent = ({ classes, dialogContent, text }: ModalButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -40,7 +40,7 @@ const ModalButtonComponent = ({ classes, modalContent, text }: ModalButtonProps)
       <ModalDialog
         isOpen={isOpen}
         handleClose={handleCloseModal}
-        content={modalContent}
+        content={dialogContent}
       />
     </Box>
   );
